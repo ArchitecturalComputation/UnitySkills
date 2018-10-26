@@ -9,12 +9,34 @@ public class LearningCode : MonoBehaviour
 
     void Start()
     {
-        int x = 10;
-        int y = 5;
-        int result = 10 / 7;
-        int remainder = 10 % 7;
+        int color = 1;
 
-        text = $"The result of {x} / {y} is {result} with a remainder of {remainder}";
+        switch (color)
+        {
+            case 1:
+                text = "red";
+                break;
+            case 2:
+                text = "green";
+                break;
+            case 3:
+                text = "blue";
+                break;
+            default:
+                text = "unknown color";
+                break;
+        }
+
+
+        //if (condition)
+        //{
+
+        //    text = $"{x} is greater than {y}.";
+        //}
+        //else
+        //{
+        //    text = $"{x} is smaller or equal to {y}";
+        //}
     }
 
     private void OnGUI()
