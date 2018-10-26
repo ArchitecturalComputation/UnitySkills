@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LearningCode : MonoBehaviour {
+public class LearningCode : MonoBehaviour
+{
+    public GUISkin uiSkin;
 
-	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        Debug.Log("Hello world");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+	void Update ()
+    {
+        Debug.Log("Hello world");
+    }
+
+    private void OnGUI()
+    {
+        GUI.skin = uiSkin;
+        GUI.Label(new Rect(20, 20, 200, 50), "Hello world");
+    }
 }
