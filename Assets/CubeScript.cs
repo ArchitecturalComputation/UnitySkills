@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class CubeScript : MonoBehaviour
 {
+    public float translationSpeed = 1f;
+    public float rotationSpeed = 10.0f;
 
-	void Start ()
+    int direction = 1;
+
+    void Start() {   }
+
+    void Update()
     {
+        
 
-	}
+        if (transform.position.x > 4)
+        {
+            direction = -1;
+        }
 
-	void Update ()
-    {
-        var delta = new Vector3(0.01f, 0, 0);
-        transform.position += delta;
+        if (transform.position.x < -4)
+        {
+            direction = 1;
+        }
+
+        var delta = Vector3.right * translationSpeed;
+        delta *= Time.deltaTime;
+
+        var rotation = rotationSpeed * direction;
+        rotation *= Time.deltaTime;
+
+        transform.position += delta * direction;
+        transform.Rotate(0, rotation, 0);
     }
 }
