@@ -19,9 +19,17 @@ public class LearningCode : MonoBehaviour
             numbers.Add(i);
         }
 
-        int result;
-        int sum = SumListOfNumbers(numbers, out result);
+        numbers[0] = 5;
 
+        var numbersB = numbers;
+        numbers[0] = 10;
+
+       // "value types": int,float, Rect
+      //  "reference types": Vector3, Vector2, int[], List<int>, uiSkin
+
+        ModifyList(numbers);
+        int result = numbers[0];
+      
         text = $"{result}";
 
         // text = string.Join(", ", numbers);
@@ -34,17 +42,9 @@ public class LearningCode : MonoBehaviour
     }
 
 
-    int SumListOfNumbers(List<int> n, out int result)
+    void ModifyList(List<int> n)
     {
-        int sum = 0;
-
-        foreach (var number in n)
-        {
-            sum += number;
-        }
-
-        result = sum;
-
-        return sum;
+        n = new List<int>();
+        n[0] = 6;
     }
 }
