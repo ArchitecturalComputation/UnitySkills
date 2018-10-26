@@ -9,34 +9,14 @@ public class LearningCode : MonoBehaviour
 
     void Start()
     {
-        int color = 1;
+        //int[] numbers = new int[5];
+        // numbers[2] = 5;
 
-        switch (color)
-        {
-            case 1:
-                text = "red";
-                break;
-            case 2:
-                text = "green";
-                break;
-            case 3:
-                text = "blue";
-                break;
-            default:
-                text = "unknown color";
-                break;
-        }
-
-
-        //if (condition)
-        //{
-
-        //    text = $"{x} is greater than {y}.";
-        //}
-        //else
-        //{
-        //    text = $"{x} is smaller or equal to {y}";
-        //}
+        var numbers = new List<int>();
+        numbers.Add(5);
+        numbers[0] = 3;
+        
+        text = string.Join(", ", numbers);
     }
 
     private void OnGUI()
