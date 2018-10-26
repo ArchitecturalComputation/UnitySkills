@@ -9,14 +9,33 @@ public class LearningCode : MonoBehaviour
 
     void Start()
     {
-        //int[] numbers = new int[5];
-        // numbers[2] = 5;
-
         var numbers = new List<int>();
-        numbers.Add(5);
-        numbers[0] = 3;
-        
-        text = string.Join(", ", numbers);
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (i == 5)
+                continue;
+
+            numbers.Add(i);
+        }
+
+        int sum = 0;
+
+        int j = 0;
+        while (j < numbers.Count)
+        {
+            sum += numbers[j++];
+        }
+
+        //foreach (int number in numbers)
+        //{
+        //    sum += number;
+        //}
+
+
+
+        text = $"{sum}";
+        // text = string.Join(", ", numbers);
     }
 
     private void OnGUI()
