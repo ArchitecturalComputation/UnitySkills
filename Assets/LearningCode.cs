@@ -19,22 +19,11 @@ public class LearningCode : MonoBehaviour
             numbers.Add(i);
         }
 
-        int sum = 0;
+        int result;
+        int sum = SumListOfNumbers(numbers, out result);
 
-        int j = 0;
-        while (j < numbers.Count)
-        {
-            sum += numbers[j++];
-        }
+        text = $"{result}";
 
-        //foreach (int number in numbers)
-        //{
-        //    sum += number;
-        //}
-
-
-
-        text = $"{sum}";
         // text = string.Join(", ", numbers);
     }
 
@@ -42,5 +31,20 @@ public class LearningCode : MonoBehaviour
     {
         GUI.skin = uiSkin;
         GUI.Label(new Rect(20, 20, 200, 50), text);
+    }
+
+
+    int SumListOfNumbers(List<int> n, out int result)
+    {
+        int sum = 0;
+
+        foreach (var number in n)
+        {
+            sum += number;
+        }
+
+        result = sum;
+
+        return sum;
     }
 }
