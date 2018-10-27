@@ -24,8 +24,8 @@ public class LearningCode : MonoBehaviour
         var numbersB = numbers;
         numbers[0] = 10;
 
-       // "value types": int,float, Rect
-      //  "reference types": Vector3, Vector2, int[], List<int>, uiSkin
+       // "value types": int,float, Rect, Vector3, Vector2,
+      //  "reference types":  int[], List<int>, uiSkin
 
         ModifyList(numbers);
         int result = numbers[0];
@@ -45,6 +45,6 @@ public class LearningCode : MonoBehaviour
     void ModifyList(List<int> n)
     {
         n = new List<int>();
-        n[0] = 6;
+      //  n[0] = 6;
     }
 }
