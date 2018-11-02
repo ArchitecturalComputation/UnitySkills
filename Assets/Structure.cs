@@ -15,7 +15,7 @@ public class Structure : MonoBehaviour
 
         Random.InitState(46);
 
-        StartCoroutine(CreateTower());
+        //StartCoroutine(CreateTower());
     }
 
     IEnumerator CreateTower()
@@ -30,8 +30,12 @@ public class Structure : MonoBehaviour
         }
     }
 
-    void Update()
-    {
 
+    void OnGUI()
+    {
+       if(GUI.Button(new Rect(20, 20, 100, 40), "Create tower"))
+        {
+            StartCoroutine(CreateTower());
+        }
     }
 }
