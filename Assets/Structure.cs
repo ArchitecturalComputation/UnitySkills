@@ -26,7 +26,7 @@ public class Structure : MonoBehaviour
             var shift = Random.insideUnitCircle * 0.02f;
             go.transform.position = new Vector3(shift.x, i * _size.y, shift.y);
             go.transform.Rotate(0, Random.value * 180, 0);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

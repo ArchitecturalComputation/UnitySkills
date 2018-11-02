@@ -4,32 +4,19 @@ using UnityEngine;
 
 public class CubeScript : MonoBehaviour
 {
-    public float translationSpeed = 4f;
-    public float rotationSpeed = 10.0f;
+    MeshRenderer _renderer;
 
-    int direction = 1;
-
-    void Start() { }
-
-    void Update()
+    void Start()
     {
-        if (transform.position.x > 4)
-        {
-            direction = -1;
-        }
+        _renderer = GetComponent<MeshRenderer>();
+        var material = _renderer.material;
 
-        if (transform.position.x < -4)
-        {
-            direction = 1;
-        }
+        material.color = Color.white * Random.Range(0.4f, 0.8f);
+        //  material.color = Random.ColorHSV(0.5f, 0.7f, 0.8f, 0.8f, 0.8f, 0.8f);
+    }
 
-        var delta = Vector3.right * translationSpeed;
-        delta *= Time.deltaTime;
-
-        var rotation = rotationSpeed * direction;
-        rotation *= Time.deltaTime;
-
-        transform.position += delta * direction;
-        transform.Rotate(0, rotation, 0);
+    void OnMouseDown()
+    {
+        _renderer.material.color = Color.black;
     }
 }
