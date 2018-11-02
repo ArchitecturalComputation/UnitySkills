@@ -8,15 +8,15 @@ public class Structure : MonoBehaviour
 
     void Start()
     {
-        Random.InitState(43);
+        Random.InitState(42);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
         {
             var go = Instantiate(Cube, this.transform);
             //var shiftX = (Random.value - 0.5f) * 0.25f;
             //var shiftZ = (Random.value - 0.5f) * 0.25f;
-            var shift = Random.insideUnitCircle * 0.25f;
-            go.transform.position = new Vector3(shift.x, i, shift.y);
+            var shift = Random.insideUnitCircle * 0.2f;
+            go.transform.position = new Vector3(shift.x, i + 0.5f, shift.y);
             go.transform.Rotate(0, Random.value * 180, 0);
         }
     }
