@@ -25,7 +25,7 @@ public class LearningCode : MonoBehaviour
         numbers[0] = 10;
 
        // "value types": int,float, Rect, Vector3, Vector2,
-      //  "reference types":  int[], List<int>, uiSkin
+       // "reference types":  int[], List<int>, uiSkin, gameobject
 
         ModifyList(numbers);
         int result = numbers[0];
