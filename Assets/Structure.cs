@@ -24,12 +24,12 @@ public class Structure : MonoBehaviour
         if (go != null)
             go.transform.position = new Vector3(0, 1, 0);
 
-        StartCoroutine(CreateTower());
+       // StartCoroutine(CreateTower());
     }
+
 
     IEnumerator CreateTower()
     {
-
         foreach (var box in _boxes)
         {
             Destroy(box);
@@ -50,7 +50,6 @@ public class Structure : MonoBehaviour
 
     IEnumerator CreateWall()
     {
-
         foreach (var box in _boxes)
         {
             Destroy(box);
@@ -61,7 +60,7 @@ public class Structure : MonoBehaviour
         int rowCount = 10;
         float halfTotalWidth = rowCount * _size.x * 0.5f;
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 100; i++)
         {
             int layer = i / rowCount;
             int column = i % rowCount;
@@ -85,9 +84,24 @@ public class Structure : MonoBehaviour
             }
             // go.transform.Rotate(0, Random.value * 180, 0);
             _boxes.Add(go);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        StartCoroutine(RemoveBoxes());
+    }
+
+    IEnumerator RemoveBoxes()
+    {
+        while(_boxes.Count > 0)
+        {
+            int index = Random.Range(0, _boxes.Count);
+            Destroy(_boxes[index]);
+            _boxes.RemoveAt(index);
+
+            yield return new WaitForSeconds(1.0f);
         }
     }
+
 
     IEnumerator _coroutine = null;
 
