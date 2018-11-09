@@ -59,17 +59,31 @@ public class Structure : MonoBehaviour
         _boxes.Clear();
 
         int rowCount = 10;
+        float halfTotalWidth = rowCount * _size.x * 0.5f;
 
         for (int i = 0; i < 50; i++)
         {
             int layer = i / rowCount;
             int column = i % rowCount;
-            float x = column * _size.x;
+
+            float x = column * _size.x - halfTotalWidth;
+
+            if (layer % 2 == 0)
+                x += _size.x * 0.5f;
+
             float y = layer * _size.y;
             var go = Instantiate(Box, this.transform);
-
             go.transform.position = new Vector3(x, y, 0);
-           // go.transform.Rotate(0, Random.value * 180, 0);
+
+            if (column > 0)
+            {
+                var cube = go.transform.GetChild(0);
+                var joint = cube.gameObject.AddComponent<FixedJoint>();
+                var previous = _boxes[_boxes.Count - 1];
+                var previousRb = previous.GetComponentInChildren<Rigidbody>();
+                joint.connectedBody = previousRb;
+            }
+            // go.transform.Rotate(0, Random.value * 180, 0);
             _boxes.Add(go);
             yield return new WaitForSeconds(0.2f);
         }
