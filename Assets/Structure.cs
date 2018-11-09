@@ -5,8 +5,13 @@ using UnityEngine;
 public class Structure : MonoBehaviour
 {
     public GameObject Box;
+    public GUISkin Skin;
+
     Vector3 _size;
+    bool _isTowerConstructed = false;
+    bool _isTowerDestroyed = false;
     List<GameObject> _boxes = new List<GameObject>();
+
 
     void Start()
     {
@@ -24,9 +29,32 @@ public class Structure : MonoBehaviour
         if (go != null)
             go.transform.position = new Vector3(0, 1, 0);
 
-       // StartCoroutine(CreateTower());
+        // StartCoroutine(CreateTower());
     }
 
+    void Update()
+    {
+        if (_isTowerConstructed)
+        {
+            float totalSpeed = 0;
+
+            foreach (var box in _boxes)
+            {
+                var rb = box.GetComponentInChildren<Rigidbody>();
+                totalSpeed += rb.velocity.magnitude;
+            }
+
+            totalSpeed /= _boxes.Count;
+
+            // Debug.Log(totalSpeed);
+
+            if (totalSpeed > 0.15f)
+            {
+                _isTowerDestroyed = true;
+                Time.timeScale = 0.1f;
+            }
+        }
+    }
 
     IEnumerator CreateTower()
     {
@@ -84,21 +112,22 @@ public class Structure : MonoBehaviour
             }
             // go.transform.Rotate(0, Random.value * 180, 0);
             _boxes.Add(go);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
 
+        _isTowerConstructed = true;
         StartCoroutine(RemoveBoxes());
     }
 
     IEnumerator RemoveBoxes()
     {
-        while(_boxes.Count > 0)
+        while (_boxes.Count > 0)
         {
             int index = Random.Range(0, _boxes.Count);
             Destroy(_boxes[index]);
             _boxes.RemoveAt(index);
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
@@ -107,6 +136,8 @@ public class Structure : MonoBehaviour
 
     void OnGUI()
     {
+        GUI.skin = Skin;
+
         if (GUI.Button(new Rect(20, 20, 100, 40), "Create tower"))
         {
             if (_coroutine != null)
@@ -124,5 +155,11 @@ public class Structure : MonoBehaviour
             _coroutine = CreateWall();
             StartCoroutine(_coroutine);
         }
+
+        if(_isTowerDestroyed)
+        {
+            GUI.Label(new Rect(200, 80, 100, 100), "YOU LOST");
+        }
+
     }
 }
