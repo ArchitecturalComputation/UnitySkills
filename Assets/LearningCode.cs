@@ -14,22 +14,22 @@ namespace MyProject
             // "value types": int,float, Rect, Vector3, Vector2,
             // "reference types":  int[], List<int>, uiSkin, gameobject
 
-            var list = new List<int>();
+          //  var list = new List<int>();
 
-            int result = 0;
+           // int result = 0;
 
             //var math = new Mathf();
             //math.Sin(10);
 
             Mathf.Sin(10);
-            var cos = Mathf.Cos(2);
+           // var cos = Mathf.Cos(2);
 
-            var eyes = Animal.GetEyes();
+          //  var eyes = Animal.GetEyes();
             var dog = new Animal(10, 2, "woof");
             dog.Move(Vector3.up);
             Animal.GetEyes();
 
-            var cow = new Animal(4, 3, "moo");
+           // var cow = new Animal(4, 3, "moo");
 
             var animals = new List<Animal>();
             animals.Add(new Cat());
@@ -37,8 +37,8 @@ namespace MyProject
             // animals.Add(new Vehicle());
 
 
-            var dog = new Dog();
-            dog.Fetch();
+            //var dog = new Dog();
+            //dog.Fetch();
 
             foreach (var animal in animals)
             {
