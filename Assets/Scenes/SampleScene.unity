@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Box: {fileID: 1177275902938886, guid: 0ec18b0e2023312469a0aed9d593fbbf, type: 2}
+  Skin: {fileID: 11400000, guid: 19bcc19d3b1ec4f4d959799393fb1da0, type: 2}
 --- !u!1 &1330348847
 GameObject:
   m_ObjectHideFlags: 0

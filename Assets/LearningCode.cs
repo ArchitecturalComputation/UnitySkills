@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 namespace MyProject
@@ -11,48 +12,34 @@ namespace MyProject
 
         void Start()
         {
-            // "value types": int,float, Rect, Vector3, Vector2,
-            // "reference types":  int[], List<int>, uiSkin, gameobject
 
-          //  var list = new List<int>();
-
-           // int result = 0;
-
-            //var math = new Mathf();
-            //math.Sin(10);
-
-            Mathf.Sin(10);
-           // var cos = Mathf.Cos(2);
-
-          //  var eyes = Animal.GetEyes();
-            var dog = new Animal(10, 2, "woof");
-            dog.Move(Vector3.up);
-            Animal.GetEyes();
-
-           // var cow = new Animal(4, 3, "moo");
-
-            var animals = new List<Animal>();
-            animals.Add(new Cat());
-            animals.Add(new Dog());
-            // animals.Add(new Vehicle());
+            var numbers = new List<float>() { 1, 23, 55, 7, 3, 2 };
 
 
-            //var dog = new Dog();
-            //dog.Fetch();
+            var firstthree = FirstThree(numbers);
+            var subset = numbers.Where(n => n > 3);
 
-            foreach (var animal in animals)
+            var squares = numbers;
+
+            var powers = PowersOfTwo();
+
+            var sublist = powers
+                .Take(5)
+                .ToList();
+
+            var dog = GetAnimal<Dog>();
+        }
+
+        IEnumerable<float> PowersOfTwo()
+        {
+            int i = 0;
+            while (true)
             {
-                //animal.Move(new Vector3(2, 5, 3));
-                //animal.ChopLeg();
-                text += $"Animal has {animal.Legs} legs left. ";
+                float power = Mathf.Pow(2, i);
+                Debug.Log(power);
+                i++;
+                yield return power;
             }
-
-            // myAnimal.Sound = null;
-            // var sound = myAnimal.Sound;
-
-
-
-            // text = string.Join(", ", numbers);
         }
 
         private void OnGUI()
@@ -61,11 +48,35 @@ namespace MyProject
             GUI.Label(new Rect(20, 20, 200, 50), text);
         }
 
-
-        void ModifyList(List<int> n)
+        List<T> FirstThree<T>(List<T> input)
         {
-            n = new List<int>();
-            //  n[0] = 6;
+            var sublist = new List<T>();
+            sublist.Add(input[0]);
+            sublist.Add(input[1]);
+            sublist.Add(input[2]);
+
+            return sublist;
+        }
+
+
+        List<int> GreaterThanThree(List<int> numbers)
+        {
+            var result = new List<int>();
+
+            foreach (var num in numbers)
+            {
+                if (num > 3)
+                    result.Add(num);
+            }
+
+            return result;
+        }
+
+        List<Animal> _animals;
+
+        T GetAnimal<T>()
+        {
+            return _animals.OfType<T>().First();
         }
     }
 
