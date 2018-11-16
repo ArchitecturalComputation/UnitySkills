@@ -11,21 +11,28 @@ public class CA : MonoBehaviour
     void Start()
     {
         _ca = new CellularAutomata1D(_size);
+        StartCoroutine(CreateCA());
 
+    }
+
+    IEnumerator CreateCA()
+    {
         for (int i = 0; i < _size / 2; i++)
         {
-            CreateRow(i);
+            StartCoroutine(CreateRow(i));
+            yield return new WaitForSeconds(0.1f);
             _ca.NextGeneration();
         }
     }
 
-    void CreateRow(int generation)
+    IEnumerator CreateRow(int generation)
     {
+        var row = (bool[])_ca.Row.Clone();
         int halfSize = _size / 2;
 
         for (int i = 0; i < _size; i++)
         {
-            bool state = _ca.Row[i];
+            bool state = row[i];
 
             if (state)
             {
@@ -35,11 +42,8 @@ public class CA : MonoBehaviour
                 float y = (halfSize - generation - 1) * 0.2f;
                 box.transform.position = new Vector3(x, y, 0);
             }
+
+            yield return new WaitForSeconds(0.05f);
         }
-    }
-
-    void Update()
-    {
-
     }
 }
