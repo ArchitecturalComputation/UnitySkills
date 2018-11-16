@@ -14,6 +14,19 @@ class CellularAutomata1D
         Row[size / 2] = true;
     }
 
+    public void NextGeneration()
+    {
+        var temp = new bool[_size];
+
+        for (int i = 0; i < _size; i++)
+        {
+            bool next = NextState(i);
+            temp[i] = next;
+        }
+
+        Row = temp;
+    }
+
     bool NextState(int i)
     {
         bool current = Row[i];
@@ -26,8 +39,11 @@ class CellularAutomata1D
         if (current && left && !right)
             return true;
 
-        if (!current && left && !right)
+        if (!current && left && right)
             return false;
+
+        if (!current && left && !right)
+            return true;
 
         if (current && !left && right)
             return true;
