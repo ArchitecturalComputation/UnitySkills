@@ -36,7 +36,6 @@ public class CA : MonoBehaviour
 
             if (state)
             {
-
                 var box = Instantiate(Box, this.transform);
                 float x = (i - halfSize) * 0.2f;
                 float y = (halfSize - generation - 1) * 0.2f;
