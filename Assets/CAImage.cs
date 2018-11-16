@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CAImage : MonoBehaviour
 {
+    public Material Material;
     Texture2D _texture;
     CellularAutomata1D _ca;
+
     int _size = 60;
 
     void Start()
@@ -14,13 +16,20 @@ public class CAImage : MonoBehaviour
         _texture = new Texture2D(_size, _size / 2);
         _texture.filterMode = FilterMode.Point;
 
+
+        StartCoroutine(CreateCA());
+        Material.mainTexture = _texture;
+    }
+
+    IEnumerator CreateCA()
+    {
         for (int i = 0; i < _size / 2; i++)
         {
             PaintRow(i);
+            _texture.Apply();
+            yield return new WaitForSeconds(0.2f);
             _ca.NextGeneration();
         }
-
-        _texture.Apply();
     }
 
     void PaintRow(int generation)
@@ -37,6 +46,6 @@ public class CAImage : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.width / 2), _texture);
+    //    GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.width / 2), _texture);
     }
 }
